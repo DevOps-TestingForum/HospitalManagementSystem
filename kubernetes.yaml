@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Hospital
+  labels:
+    app: Hospital
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: Hospital
+  
+  template:
+    metadata:
+      labels:
+        app: Hospital
+
+    spec:
+      containers:
+        - name: Hospital
+          image: ImageName
+          ports:
+            - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: Hospital
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  
+  selector:
+    app: Hospital
+    type: LoadBalancer
