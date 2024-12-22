@@ -37,4 +37,4 @@ spec:
   
   selector:
     app: Hospital
-    type: LoadBalancer
+  type: LoadBalancer
