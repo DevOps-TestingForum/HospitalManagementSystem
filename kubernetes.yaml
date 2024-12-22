@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: hospital
-          image: verbose2001/test:2
+          image: verbose2001/test:3
           ports:
             - containerPort: 8084
 
