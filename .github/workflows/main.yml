@@ -26,13 +26,13 @@ jobs:
         run: |
           mvn -B test --file pom.xml
           mvn -B package --file pom.xml
-          mkdir build-artifacts && cp -r target/*.jar build-artifacts/
+          mkdir build-artifacts && cp -r target/*.war build-artifacts/
 
         
       - name: upload-artifacts
         uses: actions/upload-artifact@v4
         with:
-          file: build-artifacts/*.jar
+          file: build-artifacts/*.war
           path: build-artifacts
 
   download:
@@ -43,5 +43,5 @@ jobs:
       - name: Download-artifacts
         uses: actions/download-artifact@v4
         with:
-          file: build-artifacts/*.jar
+          file: build-artifacts/*.war
           path: build-artifacts
