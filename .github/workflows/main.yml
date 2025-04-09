@@ -3,7 +3,7 @@ name: CI_pipeline
 on:
   push:
     branches: [ main ]
-	
+
 jobs:
   Build_and_upload:
     runs-on: ubuntu-latest
