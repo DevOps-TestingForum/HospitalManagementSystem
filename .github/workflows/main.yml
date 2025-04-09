@@ -28,8 +28,9 @@ jobs:
       - name: upload the artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: application/*.war
-          path: application
+          name: application
+          path: application/*.war
+          retention-days: 1
 
   Download_job:
     runs-on: ubuntu-latest
@@ -39,5 +40,6 @@ jobs:
       - name: Download the artifact
         uses: actions/download-artifact@v4
         with:
-          name: application/*.war
-          path : application
+          name: application
+          path : application/*.war
+          retention-days: 1
