@@ -28,7 +28,7 @@ jobs:
       - name: upload the artifacts
         uses: actions/upload-artifact@v4
         with:
-          filename: application/*.war
+          name: application/*.war
           path: application
 
   Download_job:
@@ -39,5 +39,5 @@ jobs:
       - name: Download the artifact
         uses: actions/download-artifact@v4
         with:
-          filename: application/*.war
+          name: application/*.war
           path : application
