@@ -1,4 +1,4 @@
-name: CICD pipeline
+name: CI_hospital_management 
 
 on:
   push:
@@ -7,39 +7,20 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: self-hosted
     steps:
-      - name: Checkout_code
+      - name: checkout_code
         uses: actions/checkout@v4
 
-      - name: setup jdk 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Build with maven
+      - name: setup_docker
         run: |
-          mvn -B clean test --file pom.xml
-          mvn -B package --file pom.xml
-          mkdir application && cp target/*.war application
-      
-      - name: upload the artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: application
-          path: application/*.war
-          retention-days: 1
+          docker build -t hospital_management .
 
-  Download_job:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Download the artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: application
-          path : application/*.war
-          retention-days: 1
+      - name: docker_run
+        run: docker run -dp -p 8084:8084 hospital_management
+          
+      - name: docker_upload
+        run: |
+          docker tag verbose2001/hospital_management:latest
+          echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker push verbose2001/hospital_management:latest
