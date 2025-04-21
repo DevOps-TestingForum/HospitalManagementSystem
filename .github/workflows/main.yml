@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    env:
+      BUILD_NUMBER: ${{ github.run_number }}
+
     steps:
       - name: checkout_code
         uses: actions/checkout@v4
@@ -21,6 +24,6 @@ jobs:
           
       - name: docker_upload
         run: |
-          docker tag verbose2001/hospital_management:latest
+          docker tag hospital_management verbose2001/hospital_management:${BUILD_NUMBER}
           echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u "$DOCKER_USERNAME" --password-stdin
-          docker push verbose2001/hospital_management:latest
+          docker push verbose2001/hospital_management:${BUILD_NUMBER}
