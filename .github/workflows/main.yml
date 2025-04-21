@@ -10,6 +10,7 @@ jobs:
     runs-on: self-hosted
     env:
       BUILD_NUMBER: ${{ github.run_number }}
+      DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
 
     steps:
       - name: checkout_code
