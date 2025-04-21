@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    environment: Dev
     env:
       BUILD_NUMBER: ${{ github.run_number }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
