@@ -17,7 +17,7 @@ jobs:
           docker build -t hospital_management .
 
       - name: docker_run
-        run: docker run -dp -p 8084:8084 hospital_management
+        run: docker run -dt -p 8084:8084 hospital_management
           
       - name: docker_upload
         run: |
